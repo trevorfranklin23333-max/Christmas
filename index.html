@@ -113,13 +113,6 @@ svg {
     margin: auto;
     width: 400px;
     height: 400px;
-    animation: sway 6s ease-in-out infinite;
-}
-
-@keyframes sway {
-    0% { transform: rotate(-6deg); }
-    50% { transform: rotate(6deg); }
-    100% { transform: rotate(-6deg); }
 }
 
 .love_word {
@@ -148,9 +141,8 @@ svg {
     font-size: 1.1rem;
     cursor: pointer;
     box-shadow: 0 0 18px #ff5fa2;
-    animation: pulseBtn 1.5s infinite alternate;
-    z-index: 15;
     display: none;
+    z-index: 10;
 }
 
 /* 💖 Page 2 */
@@ -206,9 +198,32 @@ svg {
 
 <div id="scene">
 
+<!-- 🎄 BACKGROUND + TREES + SNOWMAN -->
 <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice">
     <rect width="100%" height="100%" fill="#0b1a2d"/>
     <ellipse cx="500" cy="520" rx="700" ry="120" fill="#eaf4ff"/>
+
+    <!-- Trees -->
+    <g fill="#1f6f43">
+        <polygon points="140,420 200,300 260,420"/>
+        <polygon points="180,360 200,280 220,360"/>
+        <polygon points="740,420 800,300 860,420"/>
+        <polygon points="780,360 800,280 820,360"/>
+    </g>
+
+    <!-- Trunks -->
+    <rect x="190" y="420" width="20" height="40" fill="#6b4f2a"/>
+    <rect x="790" y="420" width="20" height="40" fill="#6b4f2a"/>
+
+    <!-- ⛄ SNOWMAN -->
+    <g transform="translate(500,380)">
+        <circle r="40" cy="60" fill="#fff"/>
+        <circle r="30" cy="10" fill="#fff"/>
+        <circle r="22" cy="-30" fill="#fff"/>
+        <circle cx="-6" cy="-34" r="3"/>
+        <circle cx="6" cy="-34" r="3"/>
+        <polygon points="0,-28 18,-24 0,-22" fill="orange"/>
+    </g>
 </svg>
 
 <div id="ui"></div>
@@ -245,7 +260,6 @@ const page2 = document.getElementById("page2");
 btn.onclick = () => {
     flap.style.transform = "rotateX(180deg)";
     envelope.style.opacity = "0";
-    btn.disabled = true;
 
     setTimeout(() => {
         envelope.style.display = "none";
@@ -265,7 +279,7 @@ clickMe.onclick = () => {
 };
 
 function startSnow() {
-    for (let i = 0; i < 45; i++) {
+    for (let i = 0; i < 40; i++) {
         const snow = document.createElement("div");
         snow.className = "snow";
         snow.innerText = "❄";
@@ -279,7 +293,7 @@ function startSnow() {
 function drawHeart() {
     const ui = document.getElementById("ui");
     const text = "I love you";
-    const points = 140;
+    const points = 120;
 
     for (let i = 0; i < points; i++) {
         const t = (Math.PI * 2 * i) / points;
@@ -295,7 +309,6 @@ function drawHeart() {
         span.innerText = text;
         span.style.left = `${200 + x * 10}px`;
         span.style.top = `${200 - y * 10}px`;
-        span.style.transform = `rotate(${t * 57.3 - 90}deg)`;
         ui.appendChild(span);
     }
 }
@@ -303,5 +316,3 @@ function drawHeart() {
 
 </body>
 </html>
-
-
